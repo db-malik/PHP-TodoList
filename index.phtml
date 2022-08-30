@@ -11,3 +11,33 @@
 </head>
 
 <body>
+   <main>
+      <h1>Gestionnaire de tâches :-)</h1>
+
+      <?php if (empty($tasks) == false) : ?>
+      <!-- Formulaire listant toutes les tâches existantes avec possibilité de suppression. -->
+      <form class="standard-form" action="remove.php" method="POST">
+         <ul class="task-list">
+            <?php foreach ($tasks as $index => $taskData) : ?>
+            <li>
+               <input id="task-<?= $index ?>" type="checkbox" name="indexes[]" value="<?= $index ?>">
+               <label for="task-<?= $index ?>" class="<?= $taskData[3] ?> ">
+                  <?= $taskData[0] ?>
+                  <?php if (date_create($taskData[2]) < $now) : ?>
+                  <strong>- en retard</strong>
+                  <?php endif ?>
+               </label>
+               <p><?= $taskData[1] ?></p>
+            </li>
+            <?php endforeach ?>
+            <li>
+               <input type="submit" value="Supprimer" title="Supprimer les tâches sélectionnées">
+            </li>
+         </ul>
+      </form>
+      <hr>
+      <?php endif ?>
+   </main>
+</body>
+
+</html>
